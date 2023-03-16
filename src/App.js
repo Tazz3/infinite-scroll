@@ -1,5 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
+import LoadingScreen from "./components/UI/LoadingScreen";
 
 function App() {
   const [thisState, setThisState] = useState([]);
@@ -68,13 +69,7 @@ function App() {
             </div>
           ))}
 
-        {isLoading && (
-          <div className="lds-facebook loading">
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        )}
+        {isLoading && <LoadingScreen />}
       </div>
     </>
   );
