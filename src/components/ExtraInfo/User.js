@@ -44,7 +44,6 @@ const User = () => {
     };
     friends();
     setIsLoadingUs(false);
-    setLoadingScreens(false);
   }, [pageNums]);
 
   useEffect(() => {
