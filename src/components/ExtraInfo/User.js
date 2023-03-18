@@ -11,17 +11,21 @@ const User = () => {
   const [thisStateUs, setThisStateUs] = useState([]);
   const [isLoadingUs, setIsLoadingUs] = useState(false);
   const [pageNums, setPageNums] = useState(1);
+  const [mainUser, setMainUser] = useState(false);
 
   useEffect(() => {
     const character = async () => {
+      setMainUser(false);
       const response = await fetch(
         `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${id}`
       );
       const newDatas = await response.json();
 
       setThisStates((old) => newDatas);
+      console.log(newDatas);
     };
     character();
+    setMainUser(true);
   }, [id]);
 
   useEffect(() => {
@@ -61,7 +65,8 @@ const User = () => {
   return (
     <>
       <div className="user-container">
-        <DetailedUser itemUs={thisStates} />
+        {mainUser && <DetailedUser itemUs={thisStates} />}
+
         <h1>Friends:</h1>
         <div className="container">
           {thisStateUs.map((item) => (

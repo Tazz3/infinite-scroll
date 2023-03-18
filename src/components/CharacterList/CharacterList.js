@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 const CharacterList = (props) => {
   let userName = `/User/${props.item.id}`;
   let keys = Math.random().toString(36);
+  console.log(props.item.id);
   return (
     <Link className="characters-list" to={userName}>
-      <div key={keys} className="character-card">
+      <div key={props.item.id} className="character-card">
         <img
           src={props.item.imageUrl + `?v=${props.item.id}`}
           alt="charImage"

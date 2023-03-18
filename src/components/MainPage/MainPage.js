@@ -2,6 +2,7 @@ import "./MainPage.css";
 
 import React, { useState, useEffect } from "react";
 import CharacterList from "../CharacterList/CharacterList";
+import LoadingScreen from "../UI/LoadingScreen";
 
 const MainPage = () => {
   const [thisState, setThisState] = useState([]);
@@ -9,9 +10,11 @@ const MainPage = () => {
   const [perPage, setPerPage] = useState(20);
   const [pageNum, setPageNum] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [loadingScreens, setLoadingScreens] = useState(true);
 
   useEffect(() => {
     const characters = async () => {
+      setLoadingScreens(true);
       setIsLoading(true);
       const response = await fetch(
         `http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${pageNum}/${perPage}`
@@ -35,6 +38,7 @@ const MainPage = () => {
 
       if (scrollTop + windowHeight >= scrollHeight && !isLoading) {
         await setPageNum((prev) => (prev += 1));
+        setLoadingScreens(false);
       }
     };
 
@@ -50,6 +54,7 @@ const MainPage = () => {
       <div className="container">
         {curPage && thisState.map((item) => <CharacterList item={item} />)}
       </div>
+      {loadingScreens && <LoadingScreen />}
     </>
   );
 };
