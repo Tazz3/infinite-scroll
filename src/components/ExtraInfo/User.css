@@ -1,5 +1,9 @@
+.user-container {
+  border: 1px solid gray;
+}
+
 @media screen and (min-width: 1250px) {
-  .container {
+  .user-container {
     width: 1200px;
     margin: auto;
   }
